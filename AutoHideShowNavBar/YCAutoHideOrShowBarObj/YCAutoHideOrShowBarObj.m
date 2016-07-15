@@ -9,13 +9,23 @@
 #import "YCAutoHideOrShowBarObj.h"
 
 @interface YCAutoHideOrShowBarObj () <UIScrollViewDelegate>
-
+/**
+ *  上一次的contentOfset的y值
+ */
 @property (nonatomic,strong) NSNumber *lastY;
-
+/**
+ *  开始拖拽时的位置
+ */
 @property (nonatomic,strong) NSNumber *originY;
 
+/**
+ *  需要自动隐藏的tabBar栏的控制器
+ */
 @property (nonatomic,strong) UITabBarController *autoHideTabBarVc;
 
+/**
+ *  需要自动隐藏的navBar的控制器
+ */
 @property (nonatomic,strong) UINavigationController *autoHideNavigationVc;
 
 @end
@@ -52,15 +62,22 @@ static id _instance = nil;
 }
 
 #pragma mark UIScrollViewDelegate
+/**
+ *  开始拖拽
+ */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
     self.originY = [NSNumber numberWithFloat:scrollView.contentOffset.y];
     self.lastY = [NSNumber numberWithFloat:scrollView.contentOffset.y];
     
 }
 
+/**
+ *  正在拖拽
+ */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    if (self.lastY == nil) {
+#warning 控制器第一次显示的时候，会调用一次这个方法，而不调用上一个方法，所以要在这里做一层判断
+    if (self.lastY == nil) { // lastY 代表 上一次的contentOfset的y值
         return;
     }
     
@@ -94,29 +111,32 @@ static id _instance = nil;
     
 }
 
-
+/**
+ *  拖拽完了
+ */
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     [self hideOrHiddenNavBar:scrollView];
     self.lastY = nil;
     self.originY = nil;
 }
 
+/**
+ *  减速完了
+ */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     [self hideOrHiddenNavBar:scrollView];
     self.lastY = nil;
     self.originY = nil;
 }
 
-- (void)judegeIsNotNeededHideOrShow {
+/**
+ *  拖拽都停止了，调用这个方法，判断显示和隐藏
+ */
+- (void)hideOrHiddenNavBar:(UIScrollView *)scrollView {
     CGFloat navY = self.autoHideNavigationVc.navigationBar.frame.origin.y;
     if (navY == 20 || navY == -44) {
         return;
     }
-}
-
-- (void)hideOrHiddenNavBar:(UIScrollView *)scrollView {
-    [self judegeIsNotNeededHideOrShow];
-    CGFloat navY = self.autoHideNavigationVc.navigationBar.frame.origin.y;
     if (navY > -11) {
         [UIView animateWithDuration:0.3 animations:^{
             self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, 0);
