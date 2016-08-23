@@ -17,6 +17,14 @@
  *  开始拖拽时的位置
  */
 @property (nonatomic,strong) NSNumber *originY;
+/**
+ *  需要隐藏的导航栏
+ */
+@property (nonatomic,strong) UINavigationBar *navBar;
+/**
+ *  需要隐藏的tabbar栏
+ */
+@property (nonatomic,strong) UITabBar *tabBar;
 
 /**
  *  需要自动隐藏的tabBar栏的控制器
@@ -54,10 +62,10 @@ static id _instance = nil;
     return _instance;
 }
 
-+ (void)setupNavBarorTabBarWithScrollView:(UIScrollView *)scrollView NavigationVc:(UINavigationController *)navVc tabBarVc:(UITabBarController *)tabBarVc {
++ (void)setupNavBarorTabBarWithScrollView:(UIScrollView *)scrollView navigationBar:(UINavigationBar *)navBar tabBar:(UITabBar *)tabBar {
     YCAutoHideOrShowBarObj *obj = [self sharedInstance];
-    obj.autoHideNavigationVc = navVc;
-    obj.autoHideTabBarVc = tabBarVc;
+    obj.navBar = navBar;
+    obj.tabBar = tabBar;
     scrollView.delegate = obj;
 }
 
@@ -84,29 +92,29 @@ static id _instance = nil;
     CGFloat distance = scrollView.contentOffset.y - self.lastY.floatValue;
     
     if (distance >= 0) {
-        if (self.autoHideNavigationVc.navigationBar.frame.origin.y <= -44) {
-            self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, -64);
-            self.autoHideTabBarVc.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
+        if (self.navBar.frame.origin.y <= -44) {
+            self.navBar.transform = CGAffineTransformMakeTranslation(0, -64);
+            self.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
             return;
         }
     } else {
-        if (self.autoHideNavigationVc.navigationBar.frame.origin.y >= 20) {
-            self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, 0);
-            self.autoHideTabBarVc.tabBar.transform = CGAffineTransformMakeTranslation(0, 0);
+        if (self.navBar.frame.origin.y >= 20) {
+            self.navBar.transform = CGAffineTransformMakeTranslation(0, 0);
+            self.tabBar.transform = CGAffineTransformMakeTranslation(0, 0);
             return;
         }
     }
     
     self.lastY = [NSNumber numberWithFloat:scrollView.contentOffset.y];
     if(scrollView.contentOffset.y - self.originY.floatValue > 64 && self.originY != nil) {
-        self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, -64);
-        self.autoHideTabBarVc.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
+        self.navBar.transform = CGAffineTransformMakeTranslation(0, -64);
+        self.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
     } else if(self.originY.floatValue - scrollView.contentOffset.y > 64 && self.originY != nil){
-        self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformIdentity;
-        self.autoHideTabBarVc.tabBar.transform = CGAffineTransformIdentity;
+        self.navBar.transform = CGAffineTransformIdentity;
+        self.tabBar.transform = CGAffineTransformIdentity;
     } else {
-        self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformTranslate(self.autoHideNavigationVc.navigationBar.transform, 0, -distance);
-        self.autoHideTabBarVc.tabBar.transform = CGAffineTransformTranslate(self.autoHideTabBarVc.tabBar.transform, 0, distance);
+        self.navBar.transform = CGAffineTransformTranslate(self.navBar.transform, 0, -distance);
+        self.tabBar.transform = CGAffineTransformTranslate(self.tabBar.transform, 0, distance);
     }
     
 }
@@ -133,20 +141,20 @@ static id _instance = nil;
  *  拖拽都停止了，调用这个方法，判断显示和隐藏
  */
 - (void)hideOrHiddenNavBar:(UIScrollView *)scrollView {
-    CGFloat navY = self.autoHideNavigationVc.navigationBar.frame.origin.y;
+    CGFloat navY = self.navBar.frame.origin.y;
     if (navY == 20 || navY == -44) {
         return;
     }
     if (navY > -11) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, 0);
-            self.autoHideTabBarVc.tabBar.transform = CGAffineTransformMakeTranslation(0, 0);
+            self.navBar.transform = CGAffineTransformMakeTranslation(0, 0);
+            self.tabBar.transform = CGAffineTransformMakeTranslation(0, 0);
         }];
         
     } else {
         [UIView animateWithDuration:0.3 animations:^{
-            self.autoHideNavigationVc.navigationBar.transform = CGAffineTransformMakeTranslation(0, -64);
-            self.autoHideTabBarVc.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
+            self.navBar.transform = CGAffineTransformMakeTranslation(0, -64);
+            self.tabBar.transform = CGAffineTransformMakeTranslation(0, 49);
         }];
         if (scrollView.contentOffset.y < 0) {
             [scrollView setContentOffset:CGPointMake(0, 0)];

@@ -22,7 +22,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     
     /*--------------------------> 设置自动隐藏导航栏和tabBar栏 <------------------------*/
-    [YCAutoHideOrShowBarObj setupNavBarorTabBarWithScrollView:self.tableView NavigationVc:self.navigationController tabBarVc:self.tabBarController];
+    [YCAutoHideOrShowBarObj setupNavBarorTabBarWithScrollView:self.tableView navigationBar:self.navigationController.navigationBar tabBar:self.tabBarController.tabBar];
 }
 #pragma mark - Table view data source
 

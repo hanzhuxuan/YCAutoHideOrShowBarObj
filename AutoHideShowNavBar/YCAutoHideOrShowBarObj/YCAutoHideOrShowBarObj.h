@@ -11,6 +11,6 @@
 
 @interface YCAutoHideOrShowBarObj : NSObject
 
-+ (void)setupNavBarorTabBarWithScrollView:(UIScrollView *)scrollView NavigationVc:(UINavigationController *)navVc tabBarVc:(UITabBarController *)tabBarVc;
++ (void)setupNavBarorTabBarWithScrollView:(UIScrollView *)scrollView navigationBar:(UINavigationBar *)navBar tabBar:(UITabBar *)tabBar;
 
 @end
