@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20B1C371D9012A8006B73E9 /* YCAutoHideOrShowTon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCAutoHideOrShowTon.h; sourceTree = "<group>"; };
 		D21495FE1D38C2C800F00C8E /* YCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCTableViewController.h; sourceTree = "<group>"; };
 		D21495FF1D38C2C800F00C8E /* YCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCTableViewController.m; sourceTree = "<group>"; };
 		D21496061D38C2FC00F00C8E /* YCTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCTabBarViewController.h; sourceTree = "<group>"; };
@@ -43,12 +44,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D21495F51D38C23300F00C8E /* YCAutoHideOrShowBarObj */ = {
+		D20B1C361D90127D006B73E9 /* YCAutoHideOrShowTon(最新) */ = {
+			isa = PBXGroup;
+			children = (
+				D20B1C371D9012A8006B73E9 /* YCAutoHideOrShowTon.h */,
+			);
+			path = "YCAutoHideOrShowTon(最新)";
+			sourceTree = "<group>";
+		};
+		D21495F51D38C23300F00C8E /* YCAutoHideOrShowBarObj(废弃) */ = {
 			isa = PBXGroup;
 			children = (
 				D214960B1D38C6BF00F00C8E /* YCAutoHideOrShowBarObj.h */,
 				D214960C1D38C6BF00F00C8E /* YCAutoHideOrShowBarObj.m */,
 			);
+			name = "YCAutoHideOrShowBarObj(废弃)";
 			path = YCAutoHideOrShowBarObj;
 			sourceTree = "<group>";
 		};
@@ -92,7 +102,8 @@
 				D2A4D1D21D37931900DA830C /* AppDelegate.h */,
 				D2A4D1D31D37931900DA830C /* AppDelegate.m */,
 				D21495F91D38C2C800F00C8E /* Example */,
-				D21495F51D38C23300F00C8E /* YCAutoHideOrShowBarObj */,
+				D20B1C361D90127D006B73E9 /* YCAutoHideOrShowTon(最新) */,
+				D21495F51D38C23300F00C8E /* YCAutoHideOrShowBarObj(废弃) */,
 				D21496031D38C2FC00F00C8E /* Other */,
 				D2A4D1DB1D37931900DA830C /* Assets.xcassets */,
 				D2A4D1DD1D37931900DA830C /* LaunchScreen.storyboard */,

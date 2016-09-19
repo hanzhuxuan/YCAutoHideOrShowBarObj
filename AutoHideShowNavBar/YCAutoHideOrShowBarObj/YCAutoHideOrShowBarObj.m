@@ -84,7 +84,7 @@ static id _instance = nil;
  *  正在拖拽
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-#warning 控制器第一次显示的时候，会调用一次这个方法，而不调用上一个方法，所以要在这里做一层判断
+#pragma warning 控制器第一次显示的时候，会调用一次这个方法，而不调用上一个方法，所以要在这里做一层判断
     if (self.lastY == nil) { // lastY 代表 上一次的contentOfset的y值
         return;
     }

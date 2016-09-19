@@ -82,7 +82,3 @@
     (navBar == nil) ? : [navBar setTransform:CGAffineTransformIdentity]; \
     (tabBar == nil) ? : [tabBar setTransform:CGAffineTransformIdentity]; \
 }
-
-/*
- 
- */
